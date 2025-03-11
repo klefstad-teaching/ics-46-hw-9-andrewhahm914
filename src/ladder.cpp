@@ -45,7 +45,7 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
     }
 
     queue<vector<string>> ladder_q;
-    unordered_set<string> visited;
+    set<string> visited;
 
     ladder_q.push({begin_word});
     visited.insert(begin_word);
@@ -57,14 +57,16 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
 
         
         for (string word : word_list) {
-            if (is_adjacent(lastWord, word) && visited.find(word) == visited.end()) {
-                vector<string> new_ladder = ladder;
-                new_ladder.push_back(word);
-                visited.insert(word);
+            if (is_adjacent(lastWord, word)){
+                if (visited.find(word) == visited.end()) {
+                    visited.insert(word);
+                    vector<string> new_ladder = ladder;
+                    new_ladder.push_back(word);
+                    
 
-                if (word == end_word) {
-                    return new_ladder;
-                }
+                    if (word == end_word) {
+                        return new_ladder;
+                    }
 
                 ladder_q.push(new_ladder);
             }
@@ -94,17 +96,18 @@ void load_words(set<string>& word_list, const string& file_name) {
 
 
 void print_word_ladder(const vector<string>& ladder) {
-    if (ladder.empty()) {
-        cout << "No word ladder found." << endl;
-    } 
-    
-    else {
-        cout << "Word ladder found: ";
-        for (const auto& word : ladder) {
-            cout << word << " ";
-        }
-        cout << endl;
+    int size = ladder.size();
+
+    if (size == 0) {
+        std::cout << "No word ladder found." << std::endl;
+        return;
     }
+
+    std::cout << "Word ladder found: ";
+    for (int i = 0; i < size; i++) {
+        std::cout << ladder[i] << " ";
+    }
+    std::cout << std::endl;
 }
 
 
