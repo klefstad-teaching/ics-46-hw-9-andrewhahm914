@@ -1,5 +1,4 @@
 #include "dijkstras.h"
-#include <algorithm>
 
 // g++ -std=c++17 dijkstras_main.cpp dijkstras.cpp -o dijkstra
 

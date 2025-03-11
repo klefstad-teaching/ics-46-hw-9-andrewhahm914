@@ -1,7 +1,7 @@
 #include "ladder.h"
 
 
-// g++ -std=c++17 src/ladder_main.cpp src/ladder.cpp -o ladder
+// g++ -std=c++17 ladder_main.cpp ladder.cpp -o ladder
 
 
 using namespace std;
@@ -82,7 +82,7 @@ void load_words(set<string>& word_list, const string& file_name) {
         return;
     }
 
-    string word;
+    std::string word;
     while (file >> word) {
         word_list.insert(word);
     }
