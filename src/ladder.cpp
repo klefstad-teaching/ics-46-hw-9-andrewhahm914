@@ -20,7 +20,7 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
     }
 
     if (str1.empty() || str2.empty()) {
-        return (str1.size() + str2.size()) <= int(d);
+        return (str1.size() + str2.size()) <= d;
     }
 
     if (str1[0] == str2[0]) {
@@ -69,10 +69,10 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
                     }
 
                 ladder_q.push(new_ladder);
+                }
             }
         }
     }
-
     vector<string> empty;
     return empty;
 }
