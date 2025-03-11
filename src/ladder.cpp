@@ -11,25 +11,46 @@ void error(string word1, string word2, string msg) {
 }
 
 bool edit_distance_within(const std::string& str1, const std::string& str2, int d) {
-    if (d < 0) {
+    int strlen1 = str1.length();
+    int strlen2 = str2.length();
+
+    if (abs(strlen1 - strlen2) > d)
         return false;
-    }
 
-    if (abs(int(str1.size()) - abs(int(str2.size()))) > d){
-        return false;
-    }
+    int i = 0;
+    int j = 0;
+    int diff = 0;
+    while (i < strlen1 && j < strlen2) {
+        if (str1[i] != str2[j]) {
+            diff++;
+            
+            if (diff > d) {
+                return false;
+            } 
 
-    if (str1.empty() || str2.empty()) {
-        return (str1.size() + str2.size()) <= d;
-    }
+            if (strlen1 > strlen2){
+                i++;
+            }
 
-    if (str1[0] == str2[0]) {
-        return edit_distance_within(str1.substr(1), str2.substr(1), d);
-    }
+            else if (strlen1 < strlen2) {
+                j++;
+            }
 
-    else {
-        return edit_distance_within(str1, str2.substr(1), d - 1) || edit_distance_within(str1.substr(1), str2, d - 1) || edit_distance_within(str1.substr(1), str2.substr(1), d - 1); 
+            else {  
+                i++;
+                j++;
+            }
+        }
+
+        else{
+            i++;
+            j++;
+        }
     }
+    diff += (strlen1 - i);
+    diff += (strlen2 - j);
+
+    return diff <= d;
 }
 
 bool is_adjacent(const string& word1, const string& word2) {
@@ -40,6 +61,7 @@ bool is_adjacent(const string& word1, const string& word2) {
 
 vector<string> generate_word_ladder(const string& begin_word, const string& end_word, const set<string>& word_list) {
     if (begin_word == end_word) {
+        error(begin_word, end_word, "Words are the same");
         vector<string> empty;
         return empty;
     }
@@ -73,6 +95,7 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
             }
         }
     }
+    error(begin_word, end_word, "No word found");
     vector<string> empty;
     return empty;
 }
