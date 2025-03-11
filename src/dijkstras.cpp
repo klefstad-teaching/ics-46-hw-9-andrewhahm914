@@ -50,7 +50,7 @@ vector<int> extract_shortest_path(const vector<int>& distances, const vector<int
 
 void print_path(const vector<int>& v, int total) {
     if (!v.empty()) {
-        for (int& node : v) {
+        for (const int& node : v) {
             std::cout << node << " ";
         }
     }
