@@ -70,7 +70,8 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
         }
     }
 
-    return {};
+    vector<string> empty;
+    return empty;
 }
 
 
