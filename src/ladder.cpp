@@ -97,13 +97,10 @@ void print_word_ladder(const vector<string>& ladder) {
     } 
     
     else {
-        std::cout << "Word ladder found: ";
-
         for (const std::string &word: ladder) {
             std::cout << word << ' ';
         }
-
-        std::cout << "\n";
+        std::cout << "\nTotal cost is 0\n";
     }
 }
 
